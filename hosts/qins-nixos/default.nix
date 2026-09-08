@@ -84,12 +84,6 @@
     brave
   ];
 
-  fonts.packages = with pkgs; [
-    noto-fonts noto-fonts-cjk-sans noto-fonts-cjk-serif noto-fonts-color-emoji
-    nerd-fonts.symbols-only     # split out of the old `nerdfonts` attr in 24.11
-    nerd-fonts.jetbrains-mono
-  ];
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
