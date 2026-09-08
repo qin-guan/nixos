@@ -20,44 +20,38 @@
     };
   };
 
-  outputs = 
-  {
-    nixpkgs,
-    nixpkgs-unstable,
-    disko,
-    home-manager,
-    nix-flatpak,
-    ...
-  }: 
-  let 
-    system = "x86_64-linux";
-    username = "qinguan";
-    pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-  in
-  {
-    nixosConfigurations.qins-nixos = nixpkgs.lib.nixosSystem {
-      inherit system;
+  outputs =
+    {
+      nixpkgs,
+      nixpkgs-unstable,
+      disko,
+      home-manager,
+      nix-flatpak,
+      ...
+    }:
+    let
+      system = "x86_64-linux";
+      username = "qinguan";
+      hostname = "qins-nixos";
 
+      pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+
+      # Base special args shared by all NixOS and home-manager modules.
       specialArgs = {
-        inherit username;
+        inherit system username hostname pkgs-unstable;
       };
+    in
+    {
+      nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
 
-      modules = [
-        disko.nixosModules.disko
-        nix-flatpak.nixosModules.nix-flatpak
-        home-manager.nixosModules.home-manager
+        modules = [
+          disko.nixosModules.disko
+          nix-flatpak.nixosModules.nix-flatpak
+          home-manager.nixosModules.home-manager
 
-        ./hosts/qins-nixos
-
-	{
-	  home-manager.useGlobalPkgs = true;
-	  home-manager.useUserPackages = true;
-
-          home-manager.extraSpecialArgs = { inherit username; inherit pkgs-unstable; };
-
-	  home-manager.users.${username} = import ./home/qinguan.nix;
-	}
-      ];
+          ./hosts/${hostname}
+        ];
+      };
     };
-  };
 }

@@ -1,4 +1,5 @@
 { config, ... }:
+
 {
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
@@ -13,7 +14,6 @@
 
     powerManagement = {
       enable = true;
-      finegrained = true;
     };
     
     prime = {
@@ -26,4 +26,8 @@
       nvidiaBusId = "PCI:1@0:0:0";
     };
   };
+
+  # Required for NVIDIA CDI devices in container runtimes.
+  hardware.nvidia-container-toolkit.enable = true;
+  virtualisation.docker.daemon.settings.features.cdi = true;
 }

@@ -1,0 +1,23 @@
+{ pkgs, username, ... }:
+
+{
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
+
+  home.stateVersion = "26.05";
+
+  xdg.configFile."fontconfig/conf.d/10-hm-fonts.conf".force = true;
+
+  programs.home-manager.enable = true;
+
+  imports = [
+    ./bash.nix
+    ./gh.nix
+    ./git.nix
+    ./jujutsu.nix
+    ./opencode.nix
+    ./packages.nix
+    ./sapling.nix
+    ./vscode.nix
+  ];
+}
