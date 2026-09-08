@@ -78,12 +78,5 @@
     tmux
 
     devenv
-
-    inter
-    noto-fonts noto-fonts-cjk-sans noto-fonts-cjk-serif noto-fonts-color-emoji
-    nerd-fonts.symbols-only     # split out of the old `nerdfonts` attr in 24.11
-    nerd-fonts.jetbrains-mono
-];
-
-  fonts.fontconfig.enable = true;
+  ];
 }
