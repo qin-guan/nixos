@@ -17,6 +17,7 @@
     ./jujutsu.nix
     ./opencode.nix
     ./packages.nix
+    ./plasma.nix
     ./sapling.nix
     ./vscode.nix
   ];

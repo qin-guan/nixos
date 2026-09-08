@@ -15,8 +15,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     nix-flatpak = {
       url = "github:gmodena/nix-flatpak/?ref=latest";
+    };
+
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
     };
   };
 
@@ -26,7 +36,9 @@
       nixpkgs-unstable,
       disko,
       home-manager,
+      plasma-manager,
       nix-flatpak,
+      nix-vscode-extensions,
       ...
     }:
     let
@@ -34,11 +46,9 @@
       username = "qinguan";
       hostname = "qins-nixos";
 
-      pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-
-      # Base special args shared by all NixOS and home-manager modules.
+      # Arguments shared by NixOS modules.
       specialArgs = {
-        inherit system username hostname pkgs-unstable;
+        inherit system username hostname nixpkgs-unstable;
       };
     in
     {
@@ -49,6 +59,12 @@
           disko.nixosModules.disko
           nix-flatpak.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
+          {
+            home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
+          }
+          {
+            nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
+          }
 
           ./hosts/${hostname}
         ];

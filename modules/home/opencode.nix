@@ -1,9 +1,9 @@
-{ pkgs-unstable, ... }:
+{ pkgs, ... }:
 
 {
   programs.opencode = {
     enable = true;
-    package = pkgs-unstable.opencode;
+    package = pkgs.unstable.opencode;
     settings.permission.bash = "ask";
   };
 }

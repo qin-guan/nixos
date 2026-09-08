@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./nixpkgs.nix
     ./plasma.nix
     ./flatpak.nix
     ./fonts.nix

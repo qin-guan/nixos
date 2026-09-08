@@ -12,10 +12,6 @@
 
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-    powerManagement = {
-      enable = true;
-    };
-    
     prime = {
       offload = {
         enable = true;
