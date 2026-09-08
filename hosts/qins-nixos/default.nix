@@ -11,7 +11,7 @@
       ./disko.nix
       ./nvidia.nix
 
-      ../../modules/desktop
+      ../../modules/core
       ../../modules/containers
     ];
 

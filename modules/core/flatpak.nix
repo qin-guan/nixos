@@ -26,9 +26,9 @@
 
         # Add other Flatpak IDs here, e.g., "org.mozilla.firefox"
         "org.telegram.desktop"
-	"com.slack.Slack"
-	"com.spotify.Client"
-	"dev.vencord.Vesktop"
+        "com.slack.Slack"
+        "com.spotify.Client"
+        "dev.vencord.Vesktop"
       ];
 
       # Optional: Automatically update Flatpaks when you run nixos-rebuild switch
