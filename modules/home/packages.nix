@@ -20,5 +20,6 @@
     tmux
 
     devenv
+    nixfmt
   ];
 }
