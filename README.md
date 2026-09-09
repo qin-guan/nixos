@@ -14,34 +14,68 @@ Home Manager modules are in `modules/home/`, with one file per program where pra
 
 ## Configuration Flow
 
+Evaluation order, top to bottom:
+
+1. `flake.nix` pins all inputs and defines `nixosConfigurations.qins-nixos` via `nixpkgs.lib.nixosSystem`.
+2. `flake.nix` passes `specialArgs = { system, username, hostname, nixpkgs-unstable; }` to every NixOS module.
+3. `hosts/qins-nixos/default.nix` is the composition root. It imports host-specific files plus shared modules.
+4. `modules/core/nixpkgs.nix` configures `pkgs`: sets `allowUnfree = true` and exposes `pkgs.unstable` (built from the `nixpkgs-unstable` input, reusing the stable config).
+5. `hosts/qins-nixos/home-manager.nix` bridges NixOS into Home Manager: `useGlobalPkgs = true` (home reuses system `pkgs`), `users.<username>` loads `modules/home`, and `extraSpecialArgs = { system, username, hostname; }` is passed to every home module. Note: home modules get unstable packages via `pkgs.unstable`, not via `nixpkgs-unstable` directly.
+
 ```mermaid
 flowchart TD
-  Inputs[flake inputs<br/>nixpkgs, nixpkgs-unstable,<br/>home-manager, disko, plasma-manager] --> Flake[flake.nix]
-  Flake --> System[nixosSystem<br/>qins-nixos]
-  Flake --> Args[specialArgs<br/>system, username, hostname,<br/>nixpkgs-unstable]
-  Flake --> External[External modules<br/>disko, nix-flatpak,<br/>home-manager, plasma-manager]
-  Flake --> ExtOverlay[nix-vscode-extensions overlay]
+    subgraph Inputs["1. Flake inputs"]
+        StableIn["nixpkgs<br/>(stable, nixos-26.05)"]
+        UnstableIn["nixpkgs-unstable<br/>(nixos-unstable)"]
+        ExtMods["disko,<br/>nix-flatpak,<br/>home-manager"]
+        PlasmaMgr["plasma-manager<br/>(home-manager sharedModule)"]
+        VscodeExt["nix-vscode-extensions<br/>(overlay)"]
+    end
 
-  System --> Host[hosts/qins-nixos/default.nix]
-  Args --> CoreNixpkgs[modules/core/nixpkgs.nix]
-  External --> Host
-  ExtOverlay --> Stable[pkgs<br/>stable nixpkgs]
+    subgraph Flake["2. flake.nix wiring"]
+        Sys["nixosSystem<br/>qins-nixos<br/>(x86_64-linux)"]
+        SpecialArgs["specialArgs<br/>system, username,<br/>hostname, nixpkgs-unstable"]
+    end
 
-  Host --> HostModules[boot, networking, packages,<br/>services, users, disko]
-  Host --> Core[modules/core/default.nix]
-  Host --> Drivers[modules/drivers/nvidia-laptop.nix]
-  Core --> CoreNixpkgs
-  Core --> CoreModules[plasma, flatpak, fonts,<br/>fcitx5, virtualisation]
+    subgraph Host["3. hosts/qins-nixos/default.nix"]
+        HostFiles["host files<br/>hardware-configuration, disko,<br/>boot, networking,<br/>packages, services, users"]
+        Core["modules/core/<br/>plasma, flatpak, fonts,<br/>fcitx5, virtualisation"]
+        Driver["modules/drivers/<br/>nvidia-laptop.nix"]
+        PkgsCfg["modules/core/nixpkgs.nix<br/>allowUnfree + pkgs.unstable"]
+    end
 
-  CoreNixpkgs --> Stable
-  CoreNixpkgs --> Unstable[pkgs.unstable<br/>nixos-unstable with<br/>stable nixpkgs config]
+    subgraph Home["4. Home Manager"]
+        HMBridge["hosts/qins-nixos/home-manager.nix<br/>useGlobalPkgs, extraSpecialArgs"]
+        HomeRoot["modules/home/default.nix<br/>username, homeDirectory"]
+        Programs["per-program modules<br/>bash, git, vscode, opencode, ..."]
+    end
 
-  Host --> HMBridge[hosts/qins-nixos/home-manager.nix]
-  External --> HMBridge
-  Stable --> HM[Home Manager<br/>useGlobalPkgs = true]
-  HMBridge --> HM
-  HM --> Home[modules/home/default.nix]
-  Home --> Programs[Per-program modules<br/>bash, git, vscode, opencode, ...]
-  Stable --> Programs
-  Unstable --> Programs
+    StableIn --> Sys
+    ExtMods --> Sys
+    PlasmaMgr --> Sys
+    VscodeExt --> Sys
+    Sys --> HostFiles
+    Sys --> Core
+    Sys --> Driver
+    SpecialArgs --> HostFiles
+    SpecialArgs --> Core
+    SpecialArgs --> Driver
+    SpecialArgs --> PkgsCfg
+    StableIn --> PkgsCfg
+    UnstableIn --> PkgsCfg
+    VscodeExt --> PkgsCfg
+
+    PkgsCfg -- "pkgs + pkgs.unstable" --> HostFiles
+    PkgsCfg -- "pkgs + pkgs.unstable" --> Core
+    PkgsCfg -- "pkgs + pkgs.unstable" --> Programs
+
+    HostFiles --> HMBridge
+    HMBridge --> HomeRoot
+    HomeRoot --> Programs
 ```
+
+Where to add things:
+
+- System-wide package/service: `hosts/qins-nixos/packages.nix`, `services.nix`, or a new file under `modules/core/` if it should be shared across hosts.
+- User program/dotfile: new file under `modules/home/` imported from `modules/home/default.nix`.
+- Unstable package: use `pkgs.unstable.<name>` in either layer; no extra wiring needed.
