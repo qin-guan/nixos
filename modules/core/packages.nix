@@ -2,6 +2,9 @@
 
 {
   environment.systemPackages = with pkgs; [
-    brave
+    vim
+    wget
+    curl
+    unzip
   ];
 }
