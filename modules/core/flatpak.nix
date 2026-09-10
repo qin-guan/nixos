@@ -29,7 +29,6 @@
         "com.slack.Slack"
         "com.spotify.Client"
         "dev.vencord.Vesktop"
-        "io.missioncenter.MissionCenter"
       ];
 
       # Optional: Automatically update Flatpaks when you run nixos-rebuild switch
