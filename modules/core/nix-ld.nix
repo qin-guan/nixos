@@ -13,6 +13,16 @@ mesa
 libglvnd                                                                                                                                                                  
 curl                                                                                                                                                                      
 openssl                                                                                                                                                                   
+        attr                                                                                                                                                                      
+        libssh                                                                                                                                                                    
+        bzip2                                                                                                                                                                     
+        libxml2                                                                                                                                                                   
+        acl                                                                                                                                                                       
+        libsodium
+        util-linux
+        xz
+        systemd
+
 ];
   };
 }
