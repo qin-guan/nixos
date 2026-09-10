@@ -17,6 +17,9 @@
   programs.virt-manager.enable = true;
 
   environment.systemPackages = with pkgs; [
+    qemu
     virt-viewer
   ];
+
+  systemd.tmpfiles.rules = [ "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware" ];
 }
