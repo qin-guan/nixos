@@ -2,6 +2,8 @@
 
 {
   imports = [
+    ./tailscale.nix
+    ./netbird.nix
     ./nixpkgs.nix
     ./packages.nix
     ./plasma.nix
