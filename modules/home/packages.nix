@@ -9,7 +9,6 @@
     ripgrep
     fzf
     bat
-    eza
 
     fastfetch
     btop
