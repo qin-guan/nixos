@@ -21,7 +21,6 @@
     ./antigravity.nix
     ./antigravity-cli.nix
     ./eza.nix
-    ./bash.nix
     ./gh.nix
     ./git.nix
     ./jujutsu.nix
@@ -33,5 +32,6 @@
     ./starship.nix
     ./vscode.nix
     ./zoxide.nix
+    ./zsh.nix
   ];
 }

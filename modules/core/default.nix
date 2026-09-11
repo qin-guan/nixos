@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./blesh.nix
     ./tailscale.nix
     ./netbird.nix
     ./nixpkgs.nix
