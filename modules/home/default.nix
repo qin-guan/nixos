@@ -30,6 +30,7 @@
     ./packages.nix
     ./plasma.nix
     ./sapling.nix
+    ./starship.nix
     ./vscode.nix
     ./zoxide.nix
   ];
