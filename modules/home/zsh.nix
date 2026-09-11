@@ -12,7 +12,6 @@
     
     syntaxHighlighting = {
       enable = true;
-      highlight = "fg=#ff00ff,bg=cyan,bold,underline";
     };
   };
 }
