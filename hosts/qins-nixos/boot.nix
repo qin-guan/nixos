@@ -5,5 +5,5 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel 7.2 breaks the current NVIDIA driver because of strncpy deprecation.
-  boot.kernelPackages = pkgs.linuxPackages_7_1;
+  boot.kernelPackages = pkgs.linuxPackages_7_0;
 }
