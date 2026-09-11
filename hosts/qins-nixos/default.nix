@@ -19,6 +19,9 @@
     "nix-command"
     "flakes"
   ];
+  
+  # See ./users.nix and ../../modules/core/users.nix for user configuration.
+  programs.zsh.enable = true;
 
   system.stateVersion = "26.05";
 }
