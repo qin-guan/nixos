@@ -6,7 +6,5 @@
     wget
     curl
     unzip
-
-    pkgs.unstable.ktailctl
   ];
 }

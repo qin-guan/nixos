@@ -29,6 +29,8 @@
         "com.slack.Slack"
         "com.spotify.Client"
         "dev.vencord.Vesktop"
+        
+        "org.fkoehler.KTailctl"
       ];
 
       # Optional: Automatically update Flatpaks when you run nixos-rebuild switch
