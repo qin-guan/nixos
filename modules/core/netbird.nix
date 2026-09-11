@@ -6,6 +6,6 @@
     ui = {
       enable = true;
       package = pkgs.unstable.netbird-ui;
-    }
+    };
   };
 }
