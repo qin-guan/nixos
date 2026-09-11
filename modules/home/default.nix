@@ -11,6 +11,8 @@
   programs.home-manager.enable = true;
 
   imports = [
+    ./antigravity.nix
+    ./antigravity-cli.nix
     ./bash.nix
     ./gh.nix
     ./git.nix
