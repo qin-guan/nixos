@@ -16,7 +16,6 @@
   xdg.configFile."fontconfig/conf.d/10-hm-fonts.conf".force = true;
 
   programs.home-manager.enable = true;
-  programs.bash.blesh.enable = true;
 
   imports = [
     ./antigravity.nix
