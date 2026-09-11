@@ -26,6 +26,7 @@
     ./mise.nix
     ./opencode.nix
     ./packages.nix
+    ./pi-coding-agent.nix
     ./plasma.nix
     ./sapling.nix
     ./starship.nix
