@@ -2,6 +2,6 @@
 {
   programs.antigravity = {
     enable = true;
-    package = pkgs.unstable.antigravity;
+    package = pkgs.unstable.antigravity-ide;
   };
 }
