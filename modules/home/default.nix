@@ -23,5 +23,6 @@
     ./plasma.nix
     ./sapling.nix
     ./vscode.nix
+    ./zoxide.nix
   ];
 }
