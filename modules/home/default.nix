@@ -19,6 +19,7 @@
 
   imports = [
     ./antigravity-cli.nix
+    ./cursor.nix
     ./eza.nix
     ./gh.nix
     ./git.nix
