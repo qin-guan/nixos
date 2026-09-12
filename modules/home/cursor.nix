@@ -1,4 +1,4 @@
 { pkgs, ... }:
 {
-  programs.cursor.enabled = true;
+  programs.cursor.enable = true;
 }
