@@ -10,6 +10,7 @@
     ./services.nix
     ./users.nix
     ./home-manager.nix
+    ./microvm.nix
 
     ../../modules/core
     ../../modules/drivers/nvidia-laptop.nix
@@ -19,7 +20,7 @@
     "nix-command"
     "flakes"
   ];
-  
+
   # See ./users.nix and ../../modules/core/users.nix for user configuration.
   programs.zsh.enable = true;
 

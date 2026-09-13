@@ -15,6 +15,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    microvm = {
+      url = "github:microvm-nix/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,6 +41,7 @@
       nixpkgs-unstable,
       disko,
       home-manager,
+      microvm,
       plasma-manager,
       nix-flatpak,
       nix-vscode-extensions,
@@ -48,7 +54,13 @@
 
       # Arguments shared by NixOS modules.
       specialArgs = {
-        inherit system username hostname nixpkgs-unstable;
+        inherit
+          system
+          username
+          hostname
+          nixpkgs-unstable
+          home-manager
+          ;
       };
     in
     {
@@ -59,6 +71,7 @@
           disko.nixosModules.disko
           nix-flatpak.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
+          microvm.nixosModules.host
           {
             home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
           }
