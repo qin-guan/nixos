@@ -66,17 +66,9 @@ in
   };
 
   microvm.vms = {
-    emacsvm = mkVm {
+    codex = mkVm {
       id = 1;
-      name = "emacs";
-    };
-    goprotobufvm = mkVm {
-      id = 2;
-      name = "goprotobuf";
-      extraZshInit = ''
-        export GOPATH=$HOME/go
-        export PATH=$GOPATH/bin:$PATH
-      '';
+      name = "codex";
     };
   };
 }
