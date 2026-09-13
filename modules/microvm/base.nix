@@ -4,6 +4,7 @@
   tapId,
   mac,
   workspace,
+  keysDir ? "/var/lib/microvm-keys/${hostName}",
   username,
   home-manager,
   extraZshInit ? "",
@@ -104,7 +105,7 @@
       {
         proto = "virtiofs";
         tag = "ssh-keys";
-        source = "${workspace}/ssh-host-keys";
+        source = keysDir;
         mountPoint = "/etc/ssh/host-keys";
         readOnly = true;
       }
