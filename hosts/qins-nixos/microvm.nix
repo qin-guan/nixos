@@ -66,6 +66,8 @@ let
 
           # Ensure keys directory for VM exists
           mkdir -p "${vm.keysDir}"
+          # microvm tmpfiles may create shares as microvm:kvm; sshd requires root ownership.
+          chown root:root "${vm.keysDir}"
           chmod 755 "${vm.keysDir}"
 
           # Generate VM host key if not present
@@ -97,7 +99,7 @@ let
     map (vm: {
       name = "microvm-virtiofsd@${vm.name}";
       value = {
-        wants = [ "microvm-keys-${vm.name}.service" ];
+        requires = [ "microvm-keys-${vm.name}.service" ];
         after = [ "microvm-keys-${vm.name}.service" ];
       };
     }) vms
