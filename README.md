@@ -53,7 +53,7 @@ flowchart TD
 
     subgraph MicroVMs["5. MicroVMs (microvm.nix)"]
         VMBase["modules/microvm/base.nix<br/>cloud-hypervisor, virtiofs shares,<br/>ephemeral root, var.img overlay"]
-        VMGuests["declarative guests<br/>emacsvm (192.168.83.11),<br/>goprotobufvm (192.168.83.12)"]
+        VMGuests["declarative guests<br/>codexvm (192.168.83.11)"]
     end
 
     StableIn --> Sys

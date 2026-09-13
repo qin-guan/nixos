@@ -34,6 +34,9 @@ let
             ;
           hostName = "${name}vm";
         })
+        {
+          microvm.vsock.cid = 10 + id;
+        }
       ] ++ extraModules;
     };
 in
@@ -44,6 +47,7 @@ in
     "interface-name:microvm*"
   ];
   systemd.network.enable = true;
+  systemd.network.wait-online.enable = false;
   systemd.network.netdevs."20-microbr".netdevConfig = {
     Kind = "bridge";
     Name = "microbr";
@@ -64,6 +68,7 @@ in
     internalInterfaces = [ "microbr" ];
     # No fixed externalInterface: this laptop can use Ethernet or Wi-Fi.
   };
+  networking.firewall.trustedInterfaces = [ "microbr" ];
 
   microvm.vms = {
     codex = mkVm {
