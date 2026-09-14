@@ -14,6 +14,9 @@
   imports = [ home-manager.nixosModules.home-manager ];
   system.stateVersion = "26.05";
   networking.hostName = hostName;
+  
+  environment.localBinInPath = true;
+  programs.nix-ld.enable = true;
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
@@ -113,7 +116,7 @@
         proto = "virtiofs";
         tag = "workspace";
         source = workspace;
-        mountPoint = workspace;
+        mountPoint = "/home/${username}";
       }
     ];
     interfaces = [

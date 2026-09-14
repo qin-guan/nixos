@@ -162,6 +162,48 @@ in
       StrictHostKeyChecking yes
   '') vms;
 
+  environment.systemPackages = [
+    (pkgs.writeShellApplication {
+      name = "microvm-forward";
+      runtimeInputs = [ pkgs.openssh ];
+      text = ''
+        if (( $# < 2 )); then
+          echo "Usage: microvm-forward VM PORT [PORT ...]" >&2
+          echo "Forward host localhost ports to VM localhost; Ctrl-C stops forwarding." >&2
+          exit 1
+        fi
+
+        vm=$1
+        shift
+        case "$vm" in
+          ${lib.concatMapStringsSep "|" (vm: vm.name) vms}) ;;
+          *) echo "Unknown microVM: $vm" >&2; exit 1 ;;
+        esac
+
+        forwards=()
+        for port in "$@"; do
+          if [[ ! "$port" =~ ^[0-9]{1,5}$ ]]; then
+            echo "Invalid TCP port: $port" >&2
+            exit 1
+          fi
+          port=$((10#$port))
+          if (( port < 1 || port > 65535 )); then
+            echo "TCP port must be between 1 and 65535: $port" >&2
+            exit 1
+          fi
+          forwards+=(-L "127.0.0.1:$port:127.0.0.1:$port")
+          forwards+=(-L "[::1]:$port:127.0.0.1:$port")
+        done
+
+        # Use an independent connection so the forwards live only as long as this command.
+        exec ssh -N -T -S none \
+          -o ExitOnForwardFailure=yes \
+          -o ServerAliveInterval=15 -o ServerAliveCountMax=3 \
+          "''${forwards[@]}" "$vm"
+      '';
+    })
+  ];
+
   microvm.vms = lib.listToAttrs (
     map (vm: {
       name = vm.name;

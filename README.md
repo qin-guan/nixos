@@ -90,3 +90,38 @@ Where to add things:
 - User program/dotfile: new file under `modules/home/` imported from `modules/home/default.nix`.
 - Unstable package: use `pkgs.unstable.<name>` in either layer; no extra wiring needed.
 - Ephemeral MicroVM: declare in `hosts/qins-nixos/microvm.nix` with project packages in `hosts/qins-nixos/microvms/<name>.nix`.
+
+## Accessing VM Servers
+
+Servers listening on `0.0.0.0` in the `codex` VM are accessible from the host at
+`http://codex:PORT` (or `http://192.168.83.11:PORT`). A host `localhost` URL does
+not reach the VM automatically. Servers bound to the VM's `127.0.0.1` cannot
+be reached through its bridge IP either.
+
+After applying this configuration with `sudo nixos-rebuild switch --flake .#qins-nixos`,
+use `microvm-forward` **on the host** when a server needs to appear on localhost:
+
+```sh
+# Start the VM if it is not already running.
+sudo systemctl start microvm@codex.service
+
+# Example: Codex login callback and a development server.
+microvm-forward codex 1455 3000
+```
+
+Keep this command running while using the servers; Ctrl-C closes the tunnel.
+It forwards both host `127.0.0.1` and `::1` to the VM's `127.0.0.1`, supporting
+guest servers bound to either `127.0.0.1` or `0.0.0.0`. The host listeners are
+loopback-only, not exposed to the LAN. The command fails if a requested host
+port is already occupied; stop the conflicting listener rather than changing
+an OAuth callback URL. The VM must be running and reachable over SSH.
+
+For **Codex MCP OAuth**, use the actual port in the login URL's `redirect_uri`
+or callback URL, not necessarily `1455` (Codex's own login commonly uses that
+port). Start login in the VM, leave it waiting, start
+`microvm-forward codex PORT` on the host, then open the authorization URL in
+the host browser. Keep the original callback hostname, port, path, and query
+unchanged. Substituting the VM IP can break OAuth redirect validation and does
+not reach loopback-only listeners. If login has already failed or timed out,
+start a fresh login attempt. MCP callback ports can change between attempts;
+forward the new port when that happens.

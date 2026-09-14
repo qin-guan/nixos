@@ -10,5 +10,6 @@
     texinfo
     pkg-config
     ncurses
+    uv
   ];
 }

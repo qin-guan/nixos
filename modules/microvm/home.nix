@@ -16,4 +16,7 @@
     initContent = extraZshInit;
   };
   programs.home-manager.enable = true;
+  programs.codex.enable = true;
+  programs.pi-coding-agent.enable = true;
+  programs.opencode.enable = true;
 }
