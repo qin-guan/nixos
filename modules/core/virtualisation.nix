@@ -22,6 +22,4 @@
     lima-full
     docker-sbx
   ];
-
-  systemd.tmpfiles.rules = [ "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware" ];
 }
