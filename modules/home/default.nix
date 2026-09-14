@@ -19,7 +19,6 @@
 
   imports = [
     ./antigravity-cli.nix
-    ./colima.nix
     ./cursor.nix
     ./eza.nix
     ./gh.nix

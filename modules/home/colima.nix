@@ -1,4 +1,0 @@
-{ ... }:
-{
-  services.colima.enable = true;
-}
