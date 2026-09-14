@@ -15,6 +15,8 @@
   };
 
   programs.virt-manager.enable = true;
+  
+  programs.lima-full.enable = true;
 
   environment.systemPackages = with pkgs; [
     qemu
