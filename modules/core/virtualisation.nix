@@ -16,11 +16,10 @@
 
   programs.virt-manager.enable = true;
   
-  programs.lima-full.enable = true;
-
   environment.systemPackages = with pkgs; [
     qemu
     virt-viewer
+    lima-full
   ];
 
   systemd.tmpfiles.rules = [ "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware" ];
