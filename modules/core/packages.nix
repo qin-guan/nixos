@@ -6,7 +6,5 @@
     wget
     curl
     unzip
-
-    android-studio-full
   ];
 }

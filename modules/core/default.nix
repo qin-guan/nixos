@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./android.nix
     ./tailscale.nix
     ./netbird.nix
     ./nixpkgs.nix
