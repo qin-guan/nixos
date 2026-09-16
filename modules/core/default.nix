@@ -11,6 +11,7 @@
     ./plasma.nix
     ./flatpak.nix
     ./fonts.nix
+    ./jetbrains.nix
     ./nix-ld.nix
     ./fcitx5.nix
     ./virtualisation.nix
