@@ -9,6 +9,7 @@
     ripgrep
     fzf
     bat
+    jq
 
     fastfetch
     btop
