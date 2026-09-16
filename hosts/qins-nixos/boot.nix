@@ -6,4 +6,7 @@
 
   # Kernel 7.2 breaks the current NVIDIA driver because of strncpy deprecation.
   # boot.kernelPackages = pkgs.linuxPackages_7_0;
+
+  boot.plymouth.enable = true;
+  boot.plymouth.theme = "solar";
 }
