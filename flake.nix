@@ -40,7 +40,7 @@
   };
 
   outputs =
-    {
+    inputs@{
       nixpkgs,
       nixpkgs-unstable,
       disko,
@@ -59,6 +59,7 @@
       # Arguments shared by NixOS modules.
       specialArgs = {
         inherit
+          inputs
           system
           username
           hostname

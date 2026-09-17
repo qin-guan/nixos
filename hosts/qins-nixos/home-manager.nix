@@ -1,11 +1,11 @@
-{ inputs, system, username, hostname, ... }:
+{ system, username, hostname, ... }:
 
 {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {
-      inherit inputs system username hostname;
+      inherit system username hostname;
     };
     users.${username} = import ../../modules/home;
   };
