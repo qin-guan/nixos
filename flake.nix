@@ -72,6 +72,7 @@
           nix-flatpak.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
           microvm.nixosModules.host
+
           {
             home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
           }

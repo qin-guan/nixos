@@ -10,7 +10,6 @@
     ./services.nix
     ./users.nix
     ./home-manager.nix
-    ./microvm.nix
 
     ../../modules/core
     ../../modules/drivers/nvidia-laptop.nix
