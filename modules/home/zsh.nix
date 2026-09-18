@@ -1,6 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  home.packages = [ pkgs.gum ];
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -12,15 +14,23 @@
     initContent = ''
       battery-status() {
         local bat=/sys/class/power_supply/BAT0
-        local current
+        local current capacity status adapter
         current=$(sed -n 's/.*\[\([^]]*\)\].*/\1/p' "$bat/charge_types")
-        printf 'Charge mode : %s\n' "$current"
-        printf 'Capacity    : %s%% (%s)\n' "$(cat "$bat/capacity")" "$(cat "$bat/status")"
+        capacity=$(cat "$bat/capacity")
+        status=$(cat "$bat/status")
         if [ "$(cat /sys/class/power_supply/ADP0/online)" = 1 ]; then
-          echo 'Adapter     : connected'
+          adapter=connected
         else
-          echo 'Adapter     : disconnected'
+          adapter=disconnected
         fi
+
+        gum style \
+          --border rounded \
+          --padding "0 1" \
+          --border-foreground 212 \
+          "Charge mode : $current" \
+          "Capacity    : $capacity% ($status)" \
+          "Adapter     : $adapter"
       }
 
       battery-toggle() {
@@ -30,23 +40,24 @@
 
         case "''${1:-}" in
           "")
-            case "$current" in
-              Fast) target=Standard ;;
-              Standard) target=Long_Life ;;
-              *) target=Fast ;;
-            esac
+            target=$(
+              gum choose \
+                --header "Charge mode (now: $current)  Fast=Rapid  Standard=Normal  Long_Life=~60%" \
+                --selected "$current" \
+                Fast Standard Long_Life
+            ) || return $?
             ;;
           fast|rapid) target=Fast ;;
           standard|normal) target=Standard ;;
           long|conservative|conservation) target=Long_Life ;;
           *)
-            echo 'usage: battery-toggle [fast|standard|long]' >&2
+            gum style --foreground 196 'usage: battery-toggle [fast|standard|long]' >&2
             return 1
             ;;
         esac
 
         echo "$target" | sudo tee "$f" >/dev/null
-        printf 'Charge mode : %s\n' "$(sed -n 's/.*\[\([^]]*\)\].*/\1/p' "$f")"
+        battery-status
       }
     '';
   };
