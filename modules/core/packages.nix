@@ -6,5 +6,7 @@
     wget
     curl
     unzip
+    
+    typst
   ];
 }
