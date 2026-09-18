@@ -18,6 +18,7 @@
   programs.home-manager.enable = true;
 
   imports = [
+    ./battery
     ./antigravity-cli.nix
     ./cursor.nix
     ./eza.nix
