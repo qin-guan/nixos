@@ -11,8 +11,8 @@
 
     # Legion 5 15IMH05 charge modes via charge_types:
     # Fast (Rapid Charge), Standard (Normal), Long_Life (Conservative, ~60%).
-    initContent = ''
-      battery-status() {
+    siteFunctions = {
+      battery-status = ''
         local bat=/sys/class/power_supply/BAT0
         local current capacity bat_status adapter
         current=$(sed -n 's/.*\[\([^]]*\)\].*/\1/p' "$bat/charge_types")
@@ -31,9 +31,9 @@
           "Charge mode : $current" \
           "Capacity    : $capacity% ($bat_status)" \
           "Adapter     : $adapter"
-      }
+      '';
 
-      battery-toggle() {
+      battery-toggle = ''
         local f=/sys/class/power_supply/BAT0/charge_types
         local current target
         current=$(sed -n 's/.*\[\([^]]*\)\].*/\1/p' "$f")
@@ -58,7 +58,7 @@
 
         echo "$target" | sudo tee "$f" >/dev/null
         battery-status
-      }
-    '';
+      '';
+    };
   };
 }
