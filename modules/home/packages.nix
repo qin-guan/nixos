@@ -22,7 +22,9 @@
     devenv
     nixfmt
     
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.grok-bot
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.nono
+
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.grok
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.grok-bot
   ];
 }
