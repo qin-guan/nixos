@@ -1,7 +1,7 @@
 # Legion 5 15IMH05 charge modes via charge_types:
 # Fast (Rapid Charge), Standard (Normal), Long_Life (Conservative, ~60%).
 def pick-mode [current: string] {
-  let header = $"Charge mode (now: ($current))  Fast=Rapid  Standard=Normal  Long_Life=~60%"
+  let header = $"Charge mode (char lparen)now: ($current)(char rparen)  Fast=Rapid  Standard=Normal  Long_Life=~60%"
   let target = (
     ^gum choose --header $header --selected $current Fast Standard Long_Life
     | str trim
