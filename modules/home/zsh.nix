@@ -14,10 +14,10 @@
     initContent = ''
       battery-status() {
         local bat=/sys/class/power_supply/BAT0
-        local current capacity status adapter
+        local current capacity bat_status adapter
         current=$(sed -n 's/.*\[\([^]]*\)\].*/\1/p' "$bat/charge_types")
         capacity=$(cat "$bat/capacity")
-        status=$(cat "$bat/status")
+        bat_status=$(cat "$bat/status")
         if [ "$(cat /sys/class/power_supply/ADP0/online)" = 1 ]; then
           adapter=connected
         else
@@ -29,7 +29,7 @@
           --padding "0 1" \
           --border-foreground 212 \
           "Charge mode : $current" \
-          "Capacity    : $capacity% ($status)" \
+          "Capacity    : $capacity% ($bat_status)" \
           "Adapter     : $adapter"
       }
 
