@@ -4,6 +4,7 @@
   imports = [
     ./android.nix
     ./appimage.nix
+    ./boot.nix
     ./tailscale.nix
     ./netbird.nix
     ./nixpkgs.nix
