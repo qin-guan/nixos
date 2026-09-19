@@ -21,7 +21,9 @@
 
     devenv
     nixfmt
-    
+
+    inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
+
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.nono
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.cursor-agent
 

@@ -32,6 +32,10 @@
     llm-agents = {
       url = "github:qin-guan/llm-agents.nix/?ref=patch-1";
     };
+    
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
   };
 
   outputs =
@@ -43,6 +47,8 @@
       plasma-manager,
       nix-flatpak,
       nix-vscode-extensions,
+      llm-agents,
+      ghostty,
       ...
     }:
     let
@@ -59,6 +65,8 @@
           hostname
           nixpkgs-unstable
           home-manager
+          llm-agents
+          ghostty
           ;
       };
     in
