@@ -24,6 +24,7 @@
     ./eza.nix
     ./gh.nix
     ./git.nix
+    ./gitbutler.nix
     ./jujutsu.nix
     ./mise.nix
     ./opencode.nix
