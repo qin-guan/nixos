@@ -3,6 +3,7 @@
 {
   imports = [
     ./android.nix
+    ./appimage.nix
     ./tailscale.nix
     ./netbird.nix
     ./nixpkgs.nix
