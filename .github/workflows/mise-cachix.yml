@@ -11,6 +11,7 @@ on:
     paths:
       - flake.lock
       - flake.nix
+      - modules/home/mise.nix
       - .github/workflows/mise-cachix.yml
 
 concurrency:
@@ -54,8 +55,7 @@ jobs:
 
       - name: Build mise
         run: |
-          nix build --print-build-logs \
-            .#nixosConfigurations.qins-nixos.pkgs.mise \
+          nix build --print-build-logs --max-jobs 1 --cores 2 \
             .#nixosConfigurations.qins-nixos.config.home-manager.users.qinguan.programs.mise.package
 
       - name: Commit flake.lock
