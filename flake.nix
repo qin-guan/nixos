@@ -36,6 +36,11 @@
     ghostty = {
       url = "github:ghostty-org/ghostty";
     };
+    
+    mise = {
+      url = "github:jdx/mise";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -49,6 +54,7 @@
       nix-vscode-extensions,
       llm-agents,
       ghostty,
+      mise,
       ...
     }:
     let
@@ -67,6 +73,7 @@
           home-manager
           llm-agents
           ghostty
+          mise
           ;
       };
     in
@@ -82,8 +89,12 @@
           {
             home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
           }
+
           {
-            nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
+            nixpkgs.overlays = [ 
+              nix-vscode-extensions.overlays.default
+              mise.overlays.default
+            ];
           }
 
           ./hosts/${hostname}
