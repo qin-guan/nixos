@@ -93,7 +93,7 @@
           {
             nixpkgs.overlays = [ 
               nix-vscode-extensions.overlays.default
-              mise.overlays.default
+              mise.overlay
             ];
           }
 
