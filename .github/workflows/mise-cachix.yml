@@ -53,7 +53,10 @@ jobs:
         run: nix flake update
 
       - name: Build mise
-        run: nix build .#nixosConfigurations.qins-nixos.pkgs.mise --print-build-logs
+        run: |
+          nix build --print-build-logs \
+            .#nixosConfigurations.qins-nixos.pkgs.mise \
+            .#nixosConfigurations.qins-nixos.config.home-manager.users.qinguan.programs.mise.package
 
       - name: Commit flake.lock
         if: github.event_name != 'push'

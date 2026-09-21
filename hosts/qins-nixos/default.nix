@@ -22,11 +22,13 @@
   nix.settings.extra-substituters = [
     "https://ghostty.cachix.org"
     "https://qinguan.cachix.org"
+    "https://cache.numtide.com"
   ];
 
   nix.settings.extra-trusted-public-keys = [
     "ghostty.cachix.org-1:QB389yTa6gTyneehvqG58y0WnHjQOqgnA+wBnpWWxns="
     "qinguan.cachix.org-1:IT9vXH44tSLMuuB9QKnuh606L1IDrRu72rtz/kyQPTA="
+    "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
   ];
 
   # See ./users.nix and ../../modules/core/users.nix for user configuration.
