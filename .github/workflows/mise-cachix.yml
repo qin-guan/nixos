@@ -55,7 +55,7 @@ jobs:
 
       - name: Build mise
         run: |
-          nix build --print-build-logs --max-jobs 1 --cores 2 \
+          nix build --print-build-logs \
             .#nixosConfigurations.qins-nixos.config.home-manager.users.qinguan.programs.mise.package
 
       - name: Commit flake.lock
