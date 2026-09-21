@@ -25,6 +25,7 @@
     inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.nono
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.cursor-agent
 
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.grok

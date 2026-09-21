@@ -25,7 +25,6 @@
     ./git.nix
     ./jujutsu.nix
     ./mise.nix
-    ./opencode.nix
     ./packages.nix
     ./pi-coding-agent.nix
     ./plasma.nix
