@@ -15,7 +15,6 @@ on:
 
 concurrency:
   group: mise-cachix
-  cancel-in-progress: true
 
 jobs:
   build:

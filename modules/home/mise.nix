@@ -2,6 +2,6 @@
 {
   programs.mise = {
     enable = true;
-    package = pkgs.mise;
+    package = inputs.mise.packages.${pkgs.system}.default;
   };
 }

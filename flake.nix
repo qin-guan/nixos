@@ -39,7 +39,6 @@
     
     mise = {
       url = "github:jdx/mise";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -93,7 +92,6 @@
           {
             nixpkgs.overlays = [ 
               nix-vscode-extensions.overlays.default
-              mise.overlay
             ];
           }
 
