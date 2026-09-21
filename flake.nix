@@ -30,7 +30,7 @@
     };
 
     llm-agents = {
-      url = "github:qin-guan/llm-agents.nix/?ref=patch-1";
+      url = "github:numtide/llm-agents.nix";
     };
     
     ghostty = {
