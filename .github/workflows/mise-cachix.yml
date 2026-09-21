@@ -1,0 +1,49 @@
+name: mise-cachix
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - flake.lock
+      - flake.nix
+      - .github/workflows/mise-cachix.yml
+
+concurrency:
+  group: mise-cachix
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: read
+    steps:
+      - name: Require Cachix configuration
+        env:
+          CACHIX_CACHE: ${{ vars.CACHIX_CACHE }}
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        run: |
+          if [ -z "$CACHIX_CACHE" ]; then
+            echo "::error::Set repository variable CACHIX_CACHE to your Cachix cache name"
+            exit 1
+          fi
+          if [ -z "$CACHIX_AUTH_TOKEN" ]; then
+            echo "::error::Set repository secret CACHIX_AUTH_TOKEN"
+            exit 1
+          fi
+
+      - uses: actions/checkout@v5
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: cachix/cachix-action@v17
+        with:
+          name: ${{ vars.CACHIX_CACHE }}
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Build mise
+        run: nix build .#nixosConfigurations.qins-nixos.pkgs.mise --print-build-logs
