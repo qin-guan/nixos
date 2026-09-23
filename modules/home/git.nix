@@ -11,6 +11,7 @@
         email = "helloqinguan@gmail.com";
       };
 
+      pull.rebase = true;
       push.default = "simple";
       init.defaultBranch = "main";
     };
