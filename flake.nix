@@ -38,7 +38,7 @@
     };
     
     mise = {
-      url = "github:jdx/mise?ref=v2026.9.11";
+      url = "github:jdx/mise?ref=v2026.9.12";
     };
   };
 
