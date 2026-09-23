@@ -22,7 +22,7 @@
     };
 
     nix-flatpak = {
-      url = "github:gmodena/nix-flatpak/?ref=latest";
+      url = "github:gmodena/nix-flatpak?ref=latest";
     };
 
     nix-vscode-extensions = {
@@ -38,7 +38,7 @@
     };
     
     mise = {
-      url = "github:jdx/mise";
+      url = "github:jdx/mise?ref=v2026.9.11";
     };
   };
 
