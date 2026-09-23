@@ -2,9 +2,11 @@ name: mise-cachix
 
 on:
   schedule:
-    # 04:00 UTC daily. GITHUB_TOKEN pushes do not retrigger workflows, so
-    # lockfile updates must live in the same job as the Cachix build.
-    - cron: "0 4 * * *"
+    # 04:00 and 16:00 UTC. Compare the latest stable jdx/mise release with the
+    # ref in flake.nix. Update and build only when they differ.
+    # GITHUB_TOKEN pushes do not retrigger workflows, so the flake update and
+    # Cachix build stay in this job.
+    - cron: "0 4,16 * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -24,7 +26,40 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v5
+
+      - name: Compare mise with the latest stable release
+        id: version
+        if: github.event_name != 'push'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          current=$(sed -n 's/.*github:jdx\/mise?ref=\([^"]*\).*/\1/p' flake.nix)
+          if [ "$(printf '%s\n' "$current" | wc -l)" -ne 1 ] || [ -z "$current" ]; then
+            echo "::error::Expected exactly one mise ref in flake.nix"
+            exit 1
+          fi
+          # Stable releases only: not a draft or prerelease, and a vX.Y.Z tag.
+          # That skips vfox, archive, and other tags published from this repo.
+          latest=$(gh api 'repos/jdx/mise/releases?per_page=100' \
+            --jq '[.[] | select(.draft == false and .prerelease == false and (.tag_name | test("^v[0-9]+\\.[0-9]+\\.[0-9]+$")))][0].tag_name')
+          if [ -z "$latest" ] || [ "$latest" = "null" ]; then
+            echo "::error::Could not find a stable mise release"
+            exit 1
+          fi
+          echo "current=$current" >> "$GITHUB_OUTPUT"
+          echo "latest=$latest" >> "$GITHUB_OUTPUT"
+          if [ "$current" = "$latest" ]; then
+            echo "update=false" >> "$GITHUB_OUTPUT"
+            echo "mise is already $current"
+          else
+            echo "update=true" >> "$GITHUB_OUTPUT"
+            echo "mise $current -> $latest"
+          fi
+
       - name: Require Cachix configuration
+        if: github.event_name == 'push' || steps.version.outputs.update == 'true'
         env:
           CACHIX_CACHE: ${{ vars.CACHIX_CACHE }}
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
@@ -38,35 +73,52 @@ jobs:
             exit 1
           fi
 
-      - uses: actions/checkout@v5
-
       - uses: cachix/install-nix-action@v31
+        if: github.event_name == 'push' || steps.version.outputs.update == 'true'
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: cachix/cachix-action@v17
+        if: github.event_name == 'push' || steps.version.outputs.update == 'true'
         with:
           name: ${{ vars.CACHIX_CACHE }}
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-      - name: Update flake.lock
-        if: github.event_name != 'push'
-        run: nix flake update
+      - name: Update mise ref
+        if: steps.version.outputs.update == 'true'
+        env:
+          LATEST: ${{ steps.version.outputs.latest }}
+        run: |
+          set -euo pipefail
+          if ! printf '%s' "$LATEST" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "::error::Refusing unexpected mise tag: $LATEST"
+            exit 1
+          fi
+          sed -i -E "s|(github:jdx/mise\?ref=)[^\"]*|\1${LATEST}|" flake.nix
+          if ! grep -Fq "github:jdx/mise?ref=${LATEST}" flake.nix; then
+            echo "::error::flake.nix does not contain mise ref ${LATEST}"
+            exit 1
+          fi
+          nix flake update mise
 
       - name: Build mise
+        if: github.event_name == 'push' || steps.version.outputs.update == 'true'
         run: |
           nix build --print-build-logs \
             .#nixosConfigurations.qins-nixos.config.home-manager.users.qinguan.programs.mise.package
 
-      - name: Commit flake.lock
-        if: github.event_name != 'push'
+      - name: Commit mise update
+        if: steps.version.outputs.update == 'true'
+        env:
+          LATEST: ${{ steps.version.outputs.latest }}
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add flake.lock
+          git add flake.nix flake.lock
           if git diff --cached --quiet; then
-            echo "flake.lock is already up to date"
+            echo "mise ref is already up to date"
             exit 0
           fi
-          git commit -m "chore: update flake.lock"
+          git commit -m "chore: update mise to ${LATEST}"
           git push
