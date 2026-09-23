@@ -37,7 +37,7 @@
   services.udev.extraRules = ''
     # Keychron Launcher WebHID access
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d044", MODE="0660", GROUP="input", TAG+="uaccess"
-    ''
+  '';
 
 
   system.stateVersion = "26.05";
