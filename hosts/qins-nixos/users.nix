@@ -3,7 +3,10 @@
 {
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [
+      "wheel"
+      "docker"
+    ];
     shell = pkgs.zsh;
   };
 }
