@@ -6,6 +6,7 @@
     wget
     curl
     unzip
+    usbutils
     
     typst
   ];
