@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#MISE description="Compare the pinned mise ref with the latest stable release"
+set -euo pipefail
+die() { echo "::error::$*"; exit 1; }
+
+current=$(jq -r .nodes.mise.original.ref flake.lock)
+[[ $current != null ]] || die "No mise ref in flake.lock"
+
+# Stable releases only: not a draft or prerelease, and a vX.Y.Z tag.
+# That skips vfox, archive, and other tags published from jdx/mise.
+latest=$(gh api 'repos/jdx/mise/releases?per_page=100' --jq \
+  '[.[] | select(.draft | not) | select(.prerelease | not) | .tag_name | select(test("^v\\d+\\.\\d+\\.\\d+$"))][0]')
+[[ $latest =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || die "No stable mise release found (got '$latest')"
+
+if [[ $current == "$latest" ]]; then
+  update=false
+  echo "mise is already $current"
+else
+  update=true
+  echo "mise $current -> $latest"
+fi
+
+# Outside CI, print the outputs instead.
+printf 'current=%s\nlatest=%s\nupdate=%s\n' "$current" "$latest" "$update" \
+  >> "${GITHUB_OUTPUT:-/dev/stdout}"

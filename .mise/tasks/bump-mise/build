@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#MISE description="Build the mise package used by home-manager"
+set -euo pipefail
+
+nix build --print-build-logs \
+  .#nixosConfigurations.qins-nixos.config.home-manager.users.qinguan.programs.mise.package

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#MISE description="Point the mise flake input at a release tag and relock"
+#USAGE arg "<tag>" help="Release tag, e.g. v2026.9.12"
+set -euo pipefail
+die() { echo "::error::$*"; exit 1; }
+
+tag=${1:?usage: mise run bump-mise:update <tag>}
+[[ $tag =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || die "Refusing unexpected mise tag: $tag"
+
+sed -i -E "s|(github:jdx/mise\?ref=)[^\"]*|\1${tag}|" flake.nix
+grep -Fq "github:jdx/mise?ref=${tag}" flake.nix || die "flake.nix does not contain mise ref $tag"
+nix flake update mise
