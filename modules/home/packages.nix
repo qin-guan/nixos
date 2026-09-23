@@ -21,6 +21,8 @@
 
     devenv
     nixfmt
+    
+    google-chrome
 
     # Ghostty
     inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
