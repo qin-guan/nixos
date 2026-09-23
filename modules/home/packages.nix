@@ -34,7 +34,7 @@
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.grok-bot
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.cursor-agent
     
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
 
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.gitbutler
