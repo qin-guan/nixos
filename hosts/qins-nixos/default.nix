@@ -31,16 +31,16 @@
     "qinguan.cachix.org-1:IT9vXH44tSLMuuB9QKnuh606L1IDrRu72rtz/kyQPTA="
     "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
     "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXYLQw/aV7GEed86nQ7IsOs="
+    "floxhub-1:0QOAlcobcEvq1mqEf4qAYCaWnTTOXpyoRv/PmqfSixM="
   ];
 
   # See ./users.nix and ../../modules/core/users.nix for user configuration.
   programs.zsh.enable = true;
-  
+
   services.udev.extraRules = ''
     # Keychron Launcher WebHID access
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="d044", MODE="0666", GROUP="input", TAG+="uaccess"
   '';
-
 
   system.stateVersion = "26.05";
 }
