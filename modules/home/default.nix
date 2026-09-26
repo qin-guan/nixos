@@ -31,6 +31,7 @@
     ./sapling.nix
     ./starship.nix
     ./vscode.nix
+    ./zed.nix
     ./zoxide.nix
     ./zsh.nix
   ];

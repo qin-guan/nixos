@@ -40,6 +40,10 @@
     mise = {
       url = "github:jdx/mise?ref=v2026.9.14";
     };
+
+    flox = {
+      url = "github:flox/flox";
+    };
   };
 
   outputs =
@@ -54,6 +58,7 @@
       llm-agents,
       ghostty,
       mise,
+      flox,
       ...
     }:
     let
@@ -84,6 +89,7 @@
           disko.nixosModules.disko
           nix-flatpak.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
+          flox.nixosModules.flox
 
           {
             home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];

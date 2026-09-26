@@ -1,0 +1,5 @@
+{ ... }:
+
+{
+  programs.flox.enable = true;
+}

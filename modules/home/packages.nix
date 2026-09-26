@@ -20,6 +20,7 @@
     tmux
 
     devenv
+    devbox
     nixfmt
     
     google-chrome

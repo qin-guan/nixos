@@ -18,6 +18,7 @@
     ./jetbrains.nix
     ./nix-ld.nix
     ./fcitx5.nix
+    ./flox.nix
     ./virtualisation.nix
   ];
 }
