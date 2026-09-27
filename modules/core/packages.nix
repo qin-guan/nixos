@@ -10,5 +10,6 @@
     
     typst
     python3
+    dotnet-sdk_11
   ];
 }
