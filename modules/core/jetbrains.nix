@@ -2,8 +2,9 @@
 
 {
   environment.systemPackages = with pkgs; [
-    jetbrains.idea
-    jetbrains.webstorm
-    jetbrains.goland
+    unstable.jetbrains.idea
+    unstable.jetbrains.webstorm
+    unstable.jetbrains.goland
+    unstable.jetbrains.rider
   ];
 }
