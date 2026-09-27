@@ -9,5 +9,6 @@
     usbutils
     
     typst
+    python3
   ];
 }
