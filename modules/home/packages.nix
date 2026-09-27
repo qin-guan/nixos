@@ -22,8 +22,6 @@
     devenv
     devbox
     nixfmt
-
-    icu
     
     google-chrome
 
