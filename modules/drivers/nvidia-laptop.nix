@@ -12,6 +12,9 @@
 
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+
     prime = {
       offload = {
         enable = true;
@@ -26,4 +29,9 @@
   # Required for NVIDIA CDI devices in container runtimes.
   hardware.nvidia-container-toolkit.enable = true;
   virtualisation.docker.daemon.settings.features.cdi = true;
+
+  boot.kernelParams = [
+    "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=1"
+  ];
 }
