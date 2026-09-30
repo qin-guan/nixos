@@ -22,8 +22,18 @@
     devenv
     devbox
     nixfmt
-    
+
+    typst
     google-chrome
+
+    # Aspire
+    inputs.aspire.packages.${pkgs.stdenv.hostPlatform.system}.aspire-cli
+
+    # .NET
+    dotnet-sdk_10
+
+    # NodeJS
+    nodejs_24
 
     # Ghostty
     inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -36,7 +46,7 @@
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.grok
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.grok-bot
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.cursor-agent
-    
+
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
 

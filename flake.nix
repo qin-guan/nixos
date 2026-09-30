@@ -44,6 +44,11 @@
     flox = {
       url = "github:flox/flox";
     };
+
+    aspire = {
+      url = "github:microsoft/aspire";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -59,6 +64,7 @@
       ghostty,
       mise,
       flox,
+      aspire,
       ...
     }:
     let
@@ -78,6 +84,8 @@
           llm-agents
           ghostty
           mise
+          flox
+          aspire
           ;
       };
     in
