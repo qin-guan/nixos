@@ -30,7 +30,7 @@
     inputs.aspire.packages.${pkgs.stdenv.hostPlatform.system}.aspire-cli
 
     # .NET
-    dotnet-sdk_11
+    dotnet-sdk_10
 
     # NodeJS
     nodejs_24
