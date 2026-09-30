@@ -11,6 +11,7 @@
     typst
     python3
     dotnet-sdk_11
+    dotnet-sdk_10
     nodejs_24
   ];
 }
