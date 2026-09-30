@@ -8,7 +8,7 @@
     unzip
     usbutils
     openssl
-    nss
+    nss.tools
     
     python3
   ];
