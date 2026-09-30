@@ -7,6 +7,8 @@
     curl
     unzip
     usbutils
+    openssl
+    nss
     
     python3
   ];
