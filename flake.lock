@@ -317,16 +317,16 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1790766859,
-        "narHash": "sha256-6l8U2p8bX+UznA6iNaLyQ2VyPwkPacgupSGCeUPfJmA=",
+        "lastModified": 1790895383,
+        "narHash": "sha256-KyMxlGInV2gw1Sv0ziPfywMpGEaYRxTnXD+qy2FYLEU=",
         "owner": "jdx",
         "repo": "mise",
-        "rev": "5a63dc5e8536b70c2d6661a8fe9d099aeb742ab7",
+        "rev": "bc11f90c74eba23bf0d7350efb540e62fb7d9ffd",
         "type": "github"
       },
       "original": {
         "owner": "jdx",
-        "ref": "v2026.9.18",
+        "ref": "v2026.10.0",
         "repo": "mise",
         "type": "github"
       }
