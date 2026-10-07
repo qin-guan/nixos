@@ -21,6 +21,4 @@
     ./flox.nix
     ./virtualisation.nix
   ];
-
-  environment.sessionVariables.SSL_CERT_FILE = "$HOME/.aspnet/dev-certs/trust/aspnetcore-localhost-3D4471165454D9DF7A4EC7F9779410322D1F6C80.pem";
 }
