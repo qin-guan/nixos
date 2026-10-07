@@ -42,6 +42,8 @@
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.nono
 
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2-desktop
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.fx
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.copilot-cli
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.amp
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.droid
