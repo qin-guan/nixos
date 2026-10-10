@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791612144,
-        "narHash": "sha256-u6Jq6KlbDuPkukWGxOjqwsAkRlxX0rkuxBrHhnxrxUk=",
+        "lastModified": 1791620519,
+        "narHash": "sha256-2nHRAAO4QSl6ucoQ4FnchTCxh9sqT+G69NjH5Q9zwnQ=",
         "owner": "microsoft",
         "repo": "aspire",
-        "rev": "ce70b037a9a2bdc95bd5c9415f19df1565782f65",
+        "rev": "c18bc24d9a6e124581e11767e63195871165c35a",
         "type": "github"
       },
       "original": {
