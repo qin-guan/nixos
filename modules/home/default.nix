@@ -35,4 +35,8 @@
     ./zoxide.nix
     ./zsh.nix
   ];
+  
+  environment.sessionVariables = {
+    DOTNET_ROOT = "${pkgs.dotnet-sdk_10}/share/dotnet";
+  };
 }
