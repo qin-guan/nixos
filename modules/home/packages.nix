@@ -31,6 +31,7 @@
 
     # .NET
     dotnet-sdk_10
+    unstable.csharpier
 
     # NodeJS
     nodejs_24

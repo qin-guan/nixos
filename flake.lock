@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791786405,
-        "narHash": "sha256-dIg04WIUZOdMidlGyVluSEHCzCJaBnVV9fI42abwJvE=",
+        "lastModified": 1791806077,
+        "narHash": "sha256-W6DccJq8wV/aVYoss0InhBwW+4fv7mfx9Ecscc1NV1Y=",
         "owner": "microsoft",
         "repo": "aspire",
-        "rev": "e6e35b7d782d8a84485c1c1c85a5e43a4abfecc0",
+        "rev": "b1d4824f1249ea4297b818a3f67c48f0cdb5a3ef",
         "type": "github"
       },
       "original": {
@@ -190,11 +190,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1791586177,
-        "narHash": "sha256-soAlsa5WmIUbyp0ADkP9lODEfNDqI+2jCNXAMsHuub0=",
+        "lastModified": 1791810120,
+        "narHash": "sha256-58vD7Ivp/j/gDyw/eMA2QdhG+aE53n4V/wBWXebup8Q=",
         "owner": "flox",
         "repo": "flox",
-        "rev": "744c37e325c194aec80cccf1074f14c7baa594c7",
+        "rev": "2af044b8c2df5c6d85865f079031db32461fa20a",
         "type": "github"
       },
       "original": {
