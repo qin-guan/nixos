@@ -36,6 +36,31 @@
     # NodeJS
     nodejs_24
 
+    (pkgs.writeShellScriptBin "alta" ''
+      export LD_LIBRARY_PATH=${
+        pkgs.lib.makeLibraryPath (
+          with pkgs;
+          [
+            webkitgtk_6_0
+            gtk4
+            pango
+            harfbuzz
+            gdk-pixbuf
+            cairo
+            vulkan-loader
+            graphene
+            libsoup_3
+            glib
+            stdenv.cc.cc.lib
+          ]
+        )
+      }''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+      export GIO_EXTRA_MODULES=${pkgs.glib-networking}/lib/gio/modules
+      export XDG_DATA_DIRS=${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}''${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}
+      export WEBKIT_DISABLE_DMABUF_RENDERER=1
+      exec "$HOME/.dotnet/tools/alta" "$@"
+    '')
+
     # Ghostty
     inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
 
