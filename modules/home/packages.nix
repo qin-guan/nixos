@@ -48,8 +48,6 @@
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.copilot-cli
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.amp
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.droid
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.droid
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.t3code
 
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.grok
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.grok-bot
