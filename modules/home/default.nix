@@ -36,6 +36,12 @@
     ./zsh.nix
   ];
   
+  # dotnetup's installer drops its binary in ~/.dotnetup, outside the Nix store.
+  # ~/.zshrc is generated, so the installer's "echo >> ~/.zshrc" does not persist.
+  home.sessionPath = [
+    "$HOME/.dotnetup"
+  ];
+
   home.sessionVariables = {
     DOTNET_ROOT = "${pkgs.dotnet-sdk_10}/share/dotnet";
   };
