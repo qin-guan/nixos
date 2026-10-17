@@ -30,7 +30,6 @@
     inputs.aspire.packages.${pkgs.stdenv.hostPlatform.system}.aspire-cli
 
     # .NET
-    dotnet-sdk_10
     unstable.csharpier
 
     # NodeJS
