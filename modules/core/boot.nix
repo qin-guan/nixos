@@ -16,11 +16,9 @@
 
     extraModulePackages = [
       config.boot.kernelPackages.lenovo-legion-module
-      config.boot.kernelPackages.v4l2loopback
     ];
     kernelModules = [
       "legion-laptop"
-      "v4l2loopback"
     ];
 
     plymouth.enable = true;
