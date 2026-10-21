@@ -14,12 +14,15 @@
 
     kernelPackages = pkgs.linuxPackages_latest;
 
-    extraModulePackages = [
-      config.boot.kernelPackages.lenovo-legion-module
-    ];
-    kernelModules = [
-      "legion-laptop"
-    ];
+    # https://github.com/NixOS/nixpkgs/issues/575192
+    # extraModulePackages = [
+    #   config.boot.kernelPackages.lenovo-legion-module
+    #   config.boot.kernelPackages.v4l2loopback
+    # ];
+    # kernelModules = [
+    #   "legion-laptop"
+    #   "v4l2loopback"
+    # ];
 
     plymouth.enable = true;
 
