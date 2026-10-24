@@ -54,6 +54,8 @@
 
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.kimi-code
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.dsh
 
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.gitbutler
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.but
