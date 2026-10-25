@@ -34,6 +34,8 @@
 
     # NodeJS
     nodejs_24
+    
+    unstable.dapr-cli
 
     # Ghostty
     inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
