@@ -36,6 +36,7 @@
     nodejs_24
     
     unstable.dapr-cli
+    unstable.zed-editor
 
     # Ghostty
     inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default

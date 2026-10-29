@@ -46,7 +46,7 @@
     };
 
     aspire = {
-      url = "github:microsoft/aspire";
+      url = "github:microsoft/aspire?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
