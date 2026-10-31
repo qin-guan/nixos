@@ -25,6 +25,7 @@
 
     typst
     google-chrome
+    fedora-media-writer
 
     # Aspire
     inputs.aspire.packages.${pkgs.stdenv.hostPlatform.system}.aspire-cli
