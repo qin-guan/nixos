@@ -32,11 +32,11 @@
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
-    
+
     ghostty = {
       url = "github:ghostty-org/ghostty";
     };
-    
+
     mise = {
       url = "github:jdx/mise?ref=v2026.11.4";
     };
@@ -47,6 +47,11 @@
 
     aspire = {
       url = "github:microsoft/aspire?ref=main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -65,6 +70,7 @@
       mise,
       flox,
       aspire,
+      zen-browser,
       ...
     }:
     let
@@ -86,6 +92,7 @@
           mise
           flox
           aspire
+          zen-browser
           ;
       };
     in
@@ -104,7 +111,7 @@
           }
 
           {
-            nixpkgs.overlays = [ 
+            nixpkgs.overlays = [
               nix-vscode-extensions.overlays.default
             ];
           }
