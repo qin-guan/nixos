@@ -2,7 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
-    brave
+    firefox
     pkgs.unstable.mission-center
   ];
 }
