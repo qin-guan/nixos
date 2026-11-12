@@ -38,7 +38,7 @@
     };
 
     mise = {
-      url = "github:jdx/mise?ref=v2026.11.6";
+      url = "github:jdx/mise?ref=v2026.11.7";
     };
 
     flox = {
