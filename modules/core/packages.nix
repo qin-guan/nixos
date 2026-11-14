@@ -9,7 +9,8 @@
     usbutils
     openssl
     nss.tools
-    
+    openconnect
+
     python3
   ];
 }
