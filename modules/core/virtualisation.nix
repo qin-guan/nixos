@@ -6,6 +6,9 @@
     libvirtd.enable = true;
 
     docker.enable = true;
+    docker.daemon.settings = {
+      bip = "172.30.0.1/16";
+    };
 
     podman = {
       enable = true;
