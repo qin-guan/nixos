@@ -46,7 +46,7 @@
     };
 
     aspire = {
-      url = "github:microsoft/aspire?ref=main";
+      url = "github:microsoft/aspire?ref=update-baseline-17.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
