@@ -2,7 +2,7 @@
 
 {
   programs.plasma = {
-    enable = true;
+    enable = false;
 
     kwin = {
       # No animation when switching between virtual desktops.
