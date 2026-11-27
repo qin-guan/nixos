@@ -43,6 +43,9 @@ in
     })
 
     {
+    # Hyprland is always available as an extra session in the display manager.
+    programs.hyprland.enable = true;
+
     # Enable CUPS to print documents.
     services.printing.enable = true;
 

@@ -15,7 +15,7 @@
   ];
 
   # Desktop environment: "gnome", "plasma" or "cosmic". Rebuild after changing.
-  my.desktop = "cosmic";
+  my.desktop = "gnome";
 
   nix.settings.experimental-features = [
     "nix-command"
