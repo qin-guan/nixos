@@ -12,8 +12,6 @@
 
   environment.systemPackages = with pkgs; [
     gnomeExtensions.just-perfection
-    gnomeExtensions.gnome-tweaks
-    gnomeExtensions.refine
 
     # Themes the app titlebars
     qadwaitadecorations
