@@ -18,4 +18,14 @@
     enable = true;
     polkitPolicyOwners = [ "qinguan" ];
   };
+
+  environment.etc = {
+    "1password/custom_allowed_browsers" = {
+      text = ''
+        floorp
+        zen-beta
+      '';
+      mode = "0755";
+    };
+  };
 }
