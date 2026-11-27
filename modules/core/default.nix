@@ -12,7 +12,7 @@
     ./packages.nix
     ./libreoffice.nix
     ./onlyoffice.nix
-    ./plasma.nix
+    ./desktop.nix
     ./flatpak.nix
     ./fonts.nix
     ./jetbrains.nix

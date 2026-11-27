@@ -3,8 +3,18 @@
 {
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager.plasma-login-manager.enable = true;
+
+  # services.displayManager.plasma-login-manager.enable = true;
+  # services.desktopManager.plasma6.enable = true;
+
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    gnomeExtensions.just-perfection
+    gnomeExtensions.gnome-tweaks
+    gnomeExtensions.refine
+  ];
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
