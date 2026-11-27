@@ -14,8 +14,8 @@
     ../../modules/drivers/nvidia-laptop.nix
   ];
 
-  # Desktop environment: "gnome" or "plasma". Rebuild after changing.
-  my.desktop = "gnome";
+  # Desktop environment: "gnome", "plasma" or "cosmic". Rebuild after changing.
+  my.desktop = "cosmic";
 
   nix.settings.experimental-features = [
     "nix-command"

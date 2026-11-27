@@ -8,6 +8,7 @@ in
     type = lib.types.enum [
       "gnome"
       "plasma"
+      "cosmic"
     ];
     default = "gnome";
     description = ''
@@ -34,6 +35,11 @@ in
     (lib.mkIf (desktop == "plasma") {
       services.displayManager.plasma-login-manager.enable = true;
       services.desktopManager.plasma6.enable = true;
+    })
+
+    (lib.mkIf (desktop == "cosmic") {
+      services.displayManager.cosmic-greeter.enable = true;
+      services.desktopManager.cosmic.enable = true;
     })
 
     {
