@@ -14,6 +14,9 @@
     ../../modules/drivers/nvidia-laptop.nix
   ];
 
+  # Desktop environment: "gnome" or "plasma". Rebuild after changing.
+  my.desktop = "gnome";
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

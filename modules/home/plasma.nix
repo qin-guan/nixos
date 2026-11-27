@@ -1,8 +1,8 @@
-{ ... }:
+{ osConfig, ... }:
 
 {
   programs.plasma = {
-    enable = false;
+    enable = osConfig.my.desktop == "plasma";
 
     kwin = {
       # No animation when switching between virtual desktops.

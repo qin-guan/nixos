@@ -5,6 +5,7 @@
     ./android.nix
     ./appimage.nix
     ./boot.nix
+    ./maintenance.nix
     ./ddc.nix
     ./tailscale.nix
     ./netbird.nix

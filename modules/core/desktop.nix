@@ -1,46 +1,66 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+let
+  desktop = config.my.desktop;
+in
 {
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
+  options.my.desktop = lib.mkOption {
+    type = lib.types.enum [
+      "gnome"
+      "plasma"
+    ];
+    default = "gnome";
+    description = ''
+      Which desktop environment to use. Switch it in hosts/<host>/default.nix
+      and rebuild; the matching Home Manager config follows automatically.
+    '';
+  };
 
-  # services.displayManager.plasma-login-manager.enable = true;
-  # services.desktopManager.plasma6.enable = true;
+  config = lib.mkMerge [
+    (lib.mkIf (desktop == "gnome") {
+      services.displayManager.gdm.enable = true;
+      services.desktopManager.gnome.enable = true;
 
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+      environment.systemPackages = with pkgs; [
+        # Themes the app titlebars
+        qadwaitadecorations
+        qadwaitadecorations-qt6
+        # Themes the apps
+        qgnomeplatform
+        qgnomeplatform-qt6
+      ];
+    })
 
-  environment.systemPackages = with pkgs; [
-    # Themes the app titlebars
-    qadwaitadecorations
-    qadwaitadecorations-qt6
-    # Themes the apps
-    qgnomeplatform
-    qgnomeplatform-qt6
-  ];
+    (lib.mkIf (desktop == "plasma") {
+      services.displayManager.plasma-login-manager.enable = true;
+      services.desktopManager.plasma6.enable = true;
+    })
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+    {
+    # Enable CUPS to print documents.
+    services.printing.enable = true;
 
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  services.pipewire = {
-    enable = true;
-
-    alsa = {
+    # Enable sound.
+    # services.pulseaudio.enable = true;
+    # OR
+    services.pipewire = {
       enable = true;
-      support32Bit = true;
+
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+
+      pulse.enable = true;
     };
 
-    pulse.enable = true;
-  };
+    # Enabled for Pipewire
+    security.rtkit.enable = true;
 
-  # Enabled for Pipewire
-  security.rtkit.enable = true;
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+    }
+  ];
 }
