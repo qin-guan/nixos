@@ -11,14 +11,12 @@
   services.desktopManager.gnome.enable = true;
 
   environment.systemPackages = with pkgs; [
-    gnomeExtensions.just-perfection
-
     # Themes the app titlebars
-    # qadwaitadecorations
-    # qadwaitadecorations-qt6
+    qadwaitadecorations
+    qadwaitadecorations-qt6
     # Themes the apps
-    # qgnomeplatform
-    # qgnomeplatform-qt6
+    qgnomeplatform
+    qgnomeplatform-qt6
   ];
 
   # Enable CUPS to print documents.

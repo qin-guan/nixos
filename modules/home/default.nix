@@ -23,6 +23,7 @@
     ./eza.nix
     ./gh.nix
     ./git.nix
+    ./gnome.nix
     ./jujutsu.nix
     ./mise.nix
     ./packages.nix
