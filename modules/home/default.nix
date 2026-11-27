@@ -24,6 +24,7 @@
     ./gh.nix
     ./git.nix
     ./gnome.nix
+    ./hyprland.nix
     ./jujutsu.nix
     ./mise.nix
     ./packages.nix

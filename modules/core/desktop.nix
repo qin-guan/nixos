@@ -44,7 +44,22 @@ in
 
     {
     # Hyprland is always available as an extra session in the display manager.
-    programs.hyprland.enable = true;
+    programs.hyprland = {
+      enable = true;
+      withUWSM = true;
+      xwayland.enable = true;
+    };
+
+    # Screen lock PAM service, used by hyprlock.
+    security.pam.services.hyprlock = { };
+
+    # Needed by waybar/nm-applet/polkit agent and file-manager integration.
+    services.gvfs.enable = true;
+    services.upower.enable = true;
+    security.polkit.enable = true;
+
+    # Electron/Chromium apps use native Wayland.
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     # Enable CUPS to print documents.
     services.printing.enable = true;
