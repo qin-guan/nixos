@@ -14,6 +14,13 @@
     gnomeExtensions.just-perfection
     gnomeExtensions.gnome-tweaks
     gnomeExtensions.refine
+
+    # Themes the app titlebars
+    qadwaitadecorations
+    qadwaitadecorations-qt6
+    # Themes the apps
+    qgnomeplatform
+    qgnomeplatform-qt6
   ];
 
   # Enable CUPS to print documents.
